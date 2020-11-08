@@ -1,9 +1,13 @@
 var express = require('express');
 
-const quizRouter = require("./quiz");
+const authRouter = require("./auth");
+const projectRouter = require("./project");
+const taskRouter = require("./task");
 
 let registerApp = function(app){
-    app.use("/api/quiz/", quizRouter)
+    app.use("/api/auth", authRouter);
+    app.use("/api", projectRouter);
+    app.use("/api", taskRouter);
 }
 
 module.exports = registerApp;
