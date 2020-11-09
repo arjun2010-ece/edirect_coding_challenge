@@ -1,0 +1,5 @@
+2020/11/08-21:24:28.485 1780 Reusing MANIFEST /home/user/Arjun/Nodejs_backend/E_Direct_Project/frontend/~/teste/Default/IndexedDB/https_9bbe3a0aa811ab48cc1abd0f45c43460.safeframe.googlesyndication.com_0.indexeddb.leveldb/MANIFEST-000001
+2020/11/08-21:24:30.877 17ab Level-0 table #5: started
+2020/11/08-21:24:30.888 17ab Level-0 table #5: 460 bytes OK
+2020/11/08-21:24:30.902 17ab Delete type=0 #3
+2020/11/08-21:24:30.902 17ab Manual compaction at level-0 from (begin) .. (end); will stop at (end)
