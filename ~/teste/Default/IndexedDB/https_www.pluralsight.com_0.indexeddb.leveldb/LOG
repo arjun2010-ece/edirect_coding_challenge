@@ -1,0 +1,5 @@
+2020/11/11-14:31:03.959 2e0a Reusing MANIFEST /home/user/Arjun/Nodejs_backend/E_Direct_Project/~/teste/Default/IndexedDB/https_www.pluralsight.com_0.indexeddb.leveldb/MANIFEST-000001
+2020/11/11-14:31:35.958 2e0b Level-0 table #5: started
+2020/11/11-14:31:35.966 2e0b Level-0 table #5: 1114 bytes OK
+2020/11/11-14:31:35.979 2e0b Delete type=0 #3
+2020/11/11-14:31:35.979 2e0b Manual compaction at level-0 from (begin) .. (end); will stop at (end)
