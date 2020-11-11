@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react'
 import {editProjectData, getProjectData} from "../middlewares";
 import {isAuthenticated, getAuthenticatedUser} from "../helpers";
 import { withRouter, Link } from 'react-router-dom';
+import Alert from "./reusable/Alert";
+import FormGroup from "./reusable/FormGroup";
+
 
 const EditProject = (props) => {
     const [projectName, setProjectName] = useState("");
@@ -24,9 +27,7 @@ const EditProject = (props) => {
         const response = await editProjectData(projectId, userId, projectName, jwt);
         if(response.message){
             setSuccess(true);
-            // props.history.push("/projects");
         }
-        console.log("Edited....response", response);
     }
 
     const handeChange = (e) =>{
@@ -36,32 +37,34 @@ const EditProject = (props) => {
     const showSuccess = () => {
         if(success){
           return (
-            <div className="alert alert-primary text-center my-3" role="alert">
-                Project Edited Successfully
-            </div>
+            <Alert message="Project Edited Successfully" />
           )
         }
       }
     
     const goBack = () => {
-        if(success){
-            return (
-                <Link to={"/projects"} className="btn">Go Back</Link>
-            )
-        }
+        return (
+            <Link to={"/projects"} className="btn">Go Back</Link>
+        )
     }
     return (
         <div>
             <h4 className="text-center">Edit Project</h4>
                 {showSuccess()}
             <form onSubmit={editProject} className="my-5 w-50 mx-auto border border-primary text-center">
-                <div className="form-group">
-                    <label htmlFor="projectName" className="mr-3">Project name</label>
-                    <input type="text" className="form-control w-50 mx-auto my-4" value={projectName} onChange={handeChange}
-                        id="projectName" name="projectName"  placeholder="Enter project Name" required />
-                    <button type="submit" className="btn btn-primary d-block mb-3 mx-auto">Add</button>
-                    {goBack()}
-                </div>
+
+                <FormGroup
+                    type="text"
+                    name="projectName"
+                    value={projectName}
+                    handeChange={handeChange}
+                    placeholder="Enter project Name"
+                    label="Project name"
+                    required={true}
+                    conditionalClass="w-50 mx-auto mt-4"
+                />
+                <button type="submit" className="btn btn-primary d-block mb-3 mx-auto">Add</button>
+                {goBack()}
             </form>
             
         </div>

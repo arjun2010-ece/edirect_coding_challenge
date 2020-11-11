@@ -9,9 +9,9 @@ const Navbar = ({history}) => {
     }
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-      <span className="navbar-brand" >
+      <Link to="/projects" className="navbar-brand" >
         Task Manager
-      </span>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"

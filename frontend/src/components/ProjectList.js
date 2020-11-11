@@ -60,15 +60,21 @@ const ProjectList = (props) => {
 
     const deleteProject = async (e, id) => {
         e.preventDefault();
-        let response = await deleteProjectData(id, userId, jwt);
-        if(response.message){
-            const projects = await getProjects(userId, jwt);
-            setprojects(projects.project);
+        e.stopPropagation();
+        var result = window.confirm("Want to delete?");
+        if (result) {
+            //Logic to delete the item
+            let response = await deleteProjectData(id, userId, jwt);
+            if(response.message){
+                const projects = await getProjects(userId, jwt);
+                setprojects(projects.project);
+            }
         }
     }
 
     const redirectToEdit = (e, projectId) => {
         e.preventDefault();
+        e.stopPropagation();
         props.history.push("/edit/project/" + projectId);
     }
 
@@ -77,25 +83,27 @@ const ProjectList = (props) => {
         props.history.push(`/project/${p.id}/tasks`);
     }
 
+    const projectLists = () => {
+        return projects?.map((p, i) => (
+            <div className="card mx-auto mt-4" key={i} style={{width: "18rem", cursor: "pointer"}} onClick={()=> fetchTasks(p)}>
+                <div className="card-body d-flex justify-content-between">
+                    <p>{p.name}</p>
+                    <p>
+                        <i className="fa fa-pencil mr-3" style={{cursor: "pointer"}} onClick={(e)=> redirectToEdit(e, p.id)}></i>
+                        <i className="fa fa-trash" style={{cursor: "pointer"}} onClick={(e)=> deleteProject(e, p.id)}></i>
+                    </p>
+                </div>
+            </div>
+        ))
+    }
+
     return (
         <div>
             <h4>ProjectList</h4>
             <button onClick={() => setOpen(!open)} className="btn btn-primary d-block w-25 ml-auto">Create New Project</button>
             {redirectUser()}
             {createProject()}
-            {
-                projects?.map((p, i) => (
-                    <div className="card mx-auto mt-4" key={i} style={{width: "18rem", cursor: "pointer"}} onClick={()=> fetchTasks(p)}>
-                        <div className="card-body d-flex justify-content-between">
-                            <p>{p.name}</p>
-                            <p>
-                                <i className="fa fa-pencil mr-3" style={{cursor: "pointer"}} onClick={(e)=> redirectToEdit(e, p.id)}></i>
-                                <i className="fa fa-trash" style={{cursor: "pointer"}} onClick={(e)=> deleteProject(e, p.id)}></i>
-                            </p>
-                        </div>
-                    </div>
-                ))
-            }
+            {projectLists()}
 
         </div>
     )

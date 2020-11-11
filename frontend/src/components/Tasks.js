@@ -82,9 +82,9 @@ const Tasks = (props) => {
     }
 
     const goBack = () => {
-            return (
-                <Link to={"/projects"} className="btn w-25 d-block" style={{textDecoration: "underline"}}>Go Back</Link>
-            )
+        return (
+            <Link to={"/projects"} className="btn w-25 d-block" style={{textDecoration: "underline"}}>Go Back</Link>
+        )
     }
 
     const handeChange = (e) =>{
@@ -111,7 +111,6 @@ const Tasks = (props) => {
     )
 
     const handleCheck = async (taskid) => {
-        console.log("TaskID::", taskid);
         const response = await updateTaskStatusData(taskid,{status: true}, jwt );
         if(response.message){
             const response = await fetchAllTasksProject(projectId, jwt);
@@ -126,6 +125,47 @@ const Tasks = (props) => {
     }
 
     
+    const completeTask = () => {
+        return completedTasks.length > 0 ? completedTasks?.map((t, i) => (
+            <div className="card mx-auto mt-4" key={i} style={{width: "18rem", cursor: "pointer"}}>
+                <div className="card-body d-flex justify-content-between">
+                    <input type="checkbox" className="form-check-input ml-2" onChange={()=>handleCheck(t.id)} checked={t.status} />
+                    <div className="ml-2">
+                        <p>{t.name}</p>
+                        <p>{t.description}</p>
+                    </div>
+                    {
+                        !t.status ? (
+                        <p>
+                            <i className="fa fa-pencil mr-3" style={{cursor: "pointer"}} onClick={(e)=> redirectToEdit(e, t.id)}></i>
+                            <i className="fa fa-trash" style={{cursor: "pointer"}} onClick={(e)=> deleteTask(e, t.id)}></i>
+                        </p>
+                        ): ""
+                    }
+                </div>
+            </div>
+        )) : <small>Currently Empty..</small>
+    }
+
+    const incompleteTaskList = () => {
+        return incompleteTasks.length > 0 ? incompleteTasks?.map((t, i) => (
+            <div className="card mx-auto mt-4" key={i} style={{width: "18rem", cursor: "pointer"}}>
+                <div className="card-body d-flex justify-content-between">
+                    <input type="checkbox" className="form-check-input ml-2" onChange={()=>handleCheck(t.id)}/>
+                    <div className="ml-3">
+                        <p>{t.name}</p>
+                        <p>{t.description}</p>
+                    </div>
+                    <p>
+                        <i className="fa fa-pencil mr-3" style={{cursor: "pointer"}} onClick={(e)=> redirectToEdit(e, t.id)}></i>
+                        <i className="fa fa-trash" style={{cursor: "pointer"}} onClick={(e)=> deleteTask(e, t.id)}></i>
+                    </p>
+                </div>
+            </div>
+        )) : <small>Currently empty</small>
+    }
+
+    
     return (
         <div className="container my-5 text-center">
             <div className="row">
@@ -133,49 +173,13 @@ const Tasks = (props) => {
                     <h4>{projectName} </h4>
                     
                     <button onClick={() => setOpen(!open)} className="btn btn-primary d-block w-25 ml-auto">New Tasks</button>
-                    {goBack()}
-                    {createTask()}
+                        {goBack()}
+                        {createTask()}
                     <h5>List of Todos</h5>
-                    {
-                    incompleteTasks.length > 0 ? incompleteTasks?.map((t, i) => (
-                        <div className="card mx-auto mt-4" key={i} style={{width: "18rem", cursor: "pointer"}}>
-                            <div className="card-body d-flex justify-content-between">
-                                <input type="checkbox" className="form-check-input ml-2" onChange={()=>handleCheck(t.id)}/>
-                                <div className="ml-3">
-                                    <p>{t.name}</p>
-                                    <p>{t.description}</p>
-                                </div>
-                                <p>
-                                    <i className="fa fa-pencil mr-3" style={{cursor: "pointer"}} onClick={(e)=> redirectToEdit(e, t.id)}></i>
-                                    <i className="fa fa-trash" style={{cursor: "pointer"}} onClick={(e)=> deleteTask(e, t.id)}></i>
-                                </p>
-                            </div>
-                        </div>
-                    )) : <small>Currently empty</small>
-                    }
+                        {incompleteTaskList()}
 
                     <h5 className="mt-5">Done</h5>
-                    {
-                    completedTasks.length > 0 ? completedTasks?.map((t, i) => (
-                        <div className="card mx-auto mt-4" key={i} style={{width: "18rem", cursor: "pointer"}}>
-                            <div className="card-body d-flex justify-content-between">
-                                <input type="checkbox" className="form-check-input ml-2" onChange={()=>handleCheck(t.id)} checked={t.status} />
-                                <div className="ml-2">
-                                    <p>{t.name}</p>
-                                    <p>{t.description}</p>
-                                </div>
-                                {
-                                    !t.status ? (
-                                    <p>
-                                        <i className="fa fa-pencil mr-3" style={{cursor: "pointer"}} onClick={(e)=> redirectToEdit(e, t.id)}></i>
-                                        <i className="fa fa-trash" style={{cursor: "pointer"}} onClick={(e)=> deleteTask(e, t.id)}></i>
-                                    </p>
-                                    ): ""
-                                }
-                            </div>
-                        </div>
-                    )) : <small>Currently Empty..</small>
-                    }
+                        {completeTask()}
                 </div>
             </div>
             

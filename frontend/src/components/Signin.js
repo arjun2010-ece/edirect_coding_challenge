@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {  Redirect } from "react-router-dom";
 import { signin } from "../middlewares";
 import {isAuthenticated, authenticate} from "../helpers";
-
+import FormGroup from "./reusable/FormGroup";
 import "../App.css";
 
 const Signin = () => {
@@ -77,16 +77,24 @@ const Signin = () => {
                 {showError()}
                 {redirectUser()}
               <form onSubmit={handleSubmit} className="my-5">
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" className="form-control" value={email} onChange={handeChange}
-                        id="email" name="email"  placeholder="Enter email" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" className="form-control" value={password} onChange={handeChange}
-                        name="password" id="password" placeholder="Password" />
-                  </div>
+
+                  <FormGroup
+                      type="email"
+                      name="email"
+                      value={email}
+                      handeChange={handeChange}
+                      placeholder="Enter email"
+                      label="Email"
+                  />
+
+                  <FormGroup
+                      type="password"
+                      name="password"
+                      value={password}
+                      handeChange={handeChange}
+                      placeholder="Password"
+                      label="Password"
+                  />
                   <button type="submit" className="btn btn-primary">Signin</button>
               </form>
           </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {  Redirect } from "react-router-dom";
 import { signup } from "../middlewares";
 import {isAuthenticated} from "../helpers";
+import FormGroup from "./reusable/FormGroup";
 
 import "../App.css";
 
@@ -84,26 +85,42 @@ const Signup = () => {
                 {redirectUser()}
                 {showSuccess()}
               <form onSubmit={handleSubmit} className="my-5">
-                  <div className="form-group">
-                    <label htmlFor="fullName">Name</label>
-                    <input type="text" className="form-control" value={fullName} onChange={handeChange}
-                        id="fullName" name="fullName"  placeholder="Enter Full Name" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="username">Username</label>
-                    <input type="text" className="form-control" value={username} onChange={handeChange}
-                        id="username" name="username"  placeholder="Enter user name" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" className="form-control" value={email} onChange={handeChange}
-                        id="email" name="email"  placeholder="Enter email" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" className="form-control" value={password} onChange={handeChange}
-                        name="password" id="password" placeholder="Password" />
-                  </div>
+                  <FormGroup
+                      type="text"
+                      name="fullName"
+                      value={fullName}
+                      handeChange={handeChange}
+                      placeholder="Enter Full Name"
+                      label="Name"
+                  />
+
+                  <FormGroup
+                      type="text"
+                      name="username"
+                      value={username}
+                      handeChange={handeChange}
+                      placeholder="Enter user name"
+                      label="Username"
+                  />
+
+                  <FormGroup
+                      type="email"
+                      name="email"
+                      value={email}
+                      handeChange={handeChange}
+                      placeholder="Enter email"
+                      label="Email"
+                  />
+
+                  <FormGroup
+                      type="password"
+                      name="password"
+                      value={password}
+                      handeChange={handeChange}
+                      placeholder="Password"
+                      label="Password"
+                  />
+
                   <button type="submit" className="btn btn-primary">Signup</button>
               </form>
           </div>
