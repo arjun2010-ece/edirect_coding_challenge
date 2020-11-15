@@ -14,17 +14,10 @@ const ProjectList = (props) => {
     useEffect(() => {
         const loadProjects = async () => {
             const projects = await getProjects(userId, jwt);
-            console.log(projects.project);
             setprojects(projects.project);
         }
         loadProjects();
     }, [userId, jwt]);
-
-    const redirectUser = () => {
-        if (!isAuthenticated()) {
-            return <Redirect to="/signin" />;
-        }
-      };
     
     const handeChange = (e) =>{
         setProjectName( e.target.value );
@@ -101,7 +94,6 @@ const ProjectList = (props) => {
         <div>
             <h4>ProjectList</h4>
             <button onClick={() => setOpen(!open)} className="btn btn-primary d-block w-25 ml-auto">Create New Project</button>
-            {redirectUser()}
             {createProject()}
             {projectLists()}
 

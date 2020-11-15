@@ -1,3 +1,6 @@
-2020/11/11-15:16:10.759 3 Reusing MANIFEST /home/user/Arjun/Nodejs_backend/E_Direct_Project/~/teste/Default/Local Storage/leveldb/MANIFEST-000001
-2020/11/11-15:16:10.761 3 Recovering log #4
-2020/11/11-15:16:10.773 3 Reusing old log /home/user/Arjun/Nodejs_backend/E_Direct_Project/~/teste/Default/Local Storage/leveldb/000004.log 
+2020/11/15-07:23:21.166 3 Reusing MANIFEST /home/user/Arjun/Nodejs_backend/E_Direct_Project/~/teste/Default/Local Storage/leveldb/MANIFEST-000001
+2020/11/15-07:23:21.179 3 Recovering log #4
+2020/11/15-07:23:21.181 3 Reusing old log /home/user/Arjun/Nodejs_backend/E_Direct_Project/~/teste/Default/Local Storage/leveldb/000004.log 
+2020/11/15-07:43:44.850 a Level-0 table #8: started
+2020/11/15-07:43:44.860 a Level-0 table #8: 16882 bytes OK
+2020/11/15-07:43:44.867 a Delete type=0 #4

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { fetchAllTasksProject, deleteTasksProject, addTaskData, updateTaskStatusData} from "../middlewares";
 import {isAuthenticated, getProjectNameLocalStorage} from "../helpers";
-import {  Link } from 'react-router-dom';
+import {  Link, Redirect } from 'react-router-dom';
 
 const Tasks = (props) => {
     const [tasks, setTasks] = useState({
@@ -25,8 +25,8 @@ const Tasks = (props) => {
         const loadTasks = async () => {
             const response = await fetchAllTasksProject(projectId, jwt);
             const totalTasks = response?.tasks;
-            const completed_task = totalTasks.filter(t => t.status === true);
-            const incomplete_task = totalTasks.filter(t => t.status === false);
+            const completed_task = totalTasks?.filter(t => t.status === true);
+            const incomplete_task = totalTasks?.filter(t => t.status === false);
             setTasks({...tasks,
                 completedTasks: completed_task,
                 incompleteTasks: incomplete_task
@@ -126,7 +126,7 @@ const Tasks = (props) => {
 
     
     const completeTask = () => {
-        return completedTasks.length > 0 ? completedTasks?.map((t, i) => (
+        return completedTasks?.length > 0 ? completedTasks?.map((t, i) => (
             <div className="card mx-auto mt-4" key={i} style={{width: "18rem", cursor: "pointer"}}>
                 <div className="card-body d-flex justify-content-between">
                     <input type="checkbox" className="form-check-input ml-2" onChange={()=>handleCheck(t.id)} checked={t.status} />
@@ -148,7 +148,7 @@ const Tasks = (props) => {
     }
 
     const incompleteTaskList = () => {
-        return incompleteTasks.length > 0 ? incompleteTasks?.map((t, i) => (
+        return incompleteTasks?.length > 0 ? incompleteTasks?.map((t, i) => (
             <div className="card mx-auto mt-4" key={i} style={{width: "18rem", cursor: "pointer"}}>
                 <div className="card-body d-flex justify-content-between">
                     <input type="checkbox" className="form-check-input ml-2" onChange={()=>handleCheck(t.id)}/>
@@ -165,7 +165,9 @@ const Tasks = (props) => {
         )) : <small>Currently empty</small>
     }
 
-    
+    if(!jwt){
+        return <Redirect to="/signin" />
+    }
     return (
         <div className="container my-5 text-center">
             <div className="row">

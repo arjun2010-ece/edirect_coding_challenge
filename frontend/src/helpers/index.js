@@ -1,3 +1,5 @@
+import jwtoken from "jsonwebtoken";
+
 export const authenticate = (data, next) => {
     if(typeof window !== "undefined"){
         const {token, username, userId} = data;
@@ -14,6 +16,26 @@ export const isAuthenticated = () => {
     if (localStorage.getItem("jwt")) {
         return JSON.parse(localStorage.getItem("jwt"));
     } else {
+        return false;
+    }
+};
+
+export const checkTokenExpiration = () => {
+    try {
+        if (typeof window == 'undefined') {
+            return false;
+        }
+        if (localStorage.getItem("jwt")) {
+            let token = JSON.parse(localStorage.getItem("jwt"));
+            let decoded = jwtoken.verify(token, process.env.REACT_APP_JWT_SECRET);
+            return decoded;
+        } else {
+            return false;
+        }
+        
+    } catch (error) {
+        // this removal of jwt token is very important in respect of redirect to /signin page
+        localStorage.removeItem("jwt");
         return false;
     }
 };

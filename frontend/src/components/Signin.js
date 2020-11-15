@@ -20,7 +20,7 @@ const Signin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormdata({...formdata, loading: true, error: "" });
-    let response = await signin(formdata);
+    let response = await signin({email, password});
     if(response){
       authenticate(response?.data, () => {
               setFormdata({ ...formdata, loading: false, redirectToReferrer: true });
