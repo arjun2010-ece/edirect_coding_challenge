@@ -111,3 +111,9 @@ export const checkTokenExpiration = () => {
     }
 };
 ```
+
+```
+Note::
+how to use array data types-->
+https://medium.com/codespace69/how-to-define-array-of-objects-in-sequelize-js-fb1529c5502e
+```
